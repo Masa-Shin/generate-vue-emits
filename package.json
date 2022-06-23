@@ -1,0 +1,111 @@
+{
+  "name": "generate-vue-emits",
+  "version": "1.0.0",
+  "description": "A cli tool to insert emits properties to all Vue SFC files.",
+  "main": "index.js",
+  "bin": {
+    "generate-vue-emits": "dist/cli.js"
+  },
+  "publishConfig": {
+    "@Masa-Shin:registry": "https://npm.pkg.github.com"
+  },
+  "keywords": [
+    "cli",
+    "vue",
+    "vue3"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --fix '{src,tests}/**/*.{ts,js}'",
+    "format": "prettier --write '{src,tests}/**/*.{ts,js}'",
+    "test": "vitest",
+    "test:ci": "vitest run",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Masa-Shin/generate-vue-emits.git"
+  },
+  "author": "Masa-Shin <contact@shin-translation.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Masa-Shin/generate-vue-emits/issues"
+  },
+  "dependencies": {
+    "ansi-colors": "^4.1.1",
+    "cli-progress": "^3.10.0",
+    "glob": "^8.0.1",
+    "node-html-parser": "^5.3.3",
+    "ts-morph": "^15.0.0",
+    "yargs": "^17.4.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.0.2",
+    "@commitlint/config-conventional": "17.0.2",
+    "@types/cli-progress": "3.11.0",
+    "@types/glob": "7.2.0",
+    "@types/node": "16.11.41",
+    "@types/react": "18.0.14",
+    "@types/yargs": "17.0.10",
+    "@typescript-eslint/eslint-plugin": "5.29.0",
+    "@typescript-eslint/parser": "5.29.0",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.18.0",
+    "eslint-config-prettier": "8.5.0",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.2",
+    "prettier": "2.7.1",
+    "semantic-release": "19.0.3",
+    "ts-node": "10.8.1",
+    "typescript": "4.7.4",
+    "vitest": "0.15.2"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "angular",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "chore",
+                "section": "Chore"
+              },
+              {
+                "type": "refactor",
+                "section": "Refactor"
+              },
+              {
+                "type": "perf",
+                "section": "Performance"
+              }
+            ]
+          }
+        }
+      ],
+      "@semantic-release/github",
+      "@semantic-release/npm"
+    ],
+    "branches": [
+      "main"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

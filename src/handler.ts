@@ -15,7 +15,9 @@ export const vueHandler = async ({
   targetPathPattern: string;
   position: number;
 }): Promise<void> => {
-  const filePaths = glob.sync(targetPathPattern);
+  const filePaths = glob
+    .sync(targetPathPattern)
+    .filter((path) => !path.includes("node_modules"));
 
   // ファイル群からいろんな情報を含んだFileInfoオブジェクトを作成
   const allFiles = await Promise.all(

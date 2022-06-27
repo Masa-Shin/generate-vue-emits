@@ -16,7 +16,7 @@ export const builder = (yargs: Argv<Options>): Argv<Options> => {
       requiresArg: true,
       description:
         "Path to the target vue files. Can be set with glob pattern. eg: './**/*.vue'",
-      default: "./**/*.vue",
+      default: "src/**/*.vue",
     })
     .option("p", {
       alias: "position",

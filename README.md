@@ -6,7 +6,7 @@ The tool analizes all `emit` call in the files and creates `emits` option from t
 ## 🚀 Usage
 
 ```bash
-$ npx auto-insert-emits generate -- ./src/**/*.vue
+$ npx generate-vue-emits generate -- ./src/**/*.vue
 ```
 
 Here is an example output:

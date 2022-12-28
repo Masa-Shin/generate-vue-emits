@@ -90,7 +90,7 @@ export const vueHandler = async ({
           ? `payload: ${types.join(" | ")}`
           : "payload";
 
-        accum = `${accum} ${name}: (${argument}) => true, `;
+        accum = `${accum} "${name}": (${argument}) => true, `;
         if (i === Object.keys(emitEvents).length - 1) {
           accum = `${accum}}`;
         }

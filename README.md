@@ -29,7 +29,7 @@ export default {
 }
 ```
 
-＊ Note that the tool does not format the output itself. ** It is strongly recommended that you use it with some formatter. **
+＊ Note that the tool does not format the output itself. It is strongly recommended that you use it with some formatter. 
 
 If `-t` option is set, typed validation functions are inserted instead of `null`.
 
@@ -37,7 +37,7 @@ If `-t` option is set, typed validation functions are inserted instead of `null`
 $ npx auto-insert-emits generate -t -- ./src/**/*.vue
 ```
 
-```ts:example
+```diff
 export default {
   name: 'UserList',
   components: {},

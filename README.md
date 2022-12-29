@@ -1,7 +1,9 @@
 # generate-vue-emits
-A cli tool to generate `emits` option from Vue files.
+A cli tool to generate `emits` options from Vue files.
 
-The tool analizes all `emit` call in the files and creates `emits` option from them, then inserts it into the original files. It supports both composition and options API.
+The tool analizes all `emit` calls in script tags of Vue SFC files and creates `emits` option from them, then inserts it into the original files. It supports both composition and options API.
+
+＊ It cannot detect `emit` calls in template tags.
 
 ## 🚀 Usage
 
@@ -15,7 +17,7 @@ Here is an example output:
 export default {
   name: 'UserList',
   components: {},
-+    emits: { click: () => true,  input: (payload: string) => true, },
++    emits: { input: null, click: null },
   methods: {
     onClick() {
       this.$emit('click')
@@ -27,12 +29,29 @@ export default {
 }
 ```
 
-Note that the tool does not format the output itself. It is strongly recommended that you use it with some formatter.
+＊ Note that the tool does not format the output itself. ** It is strongly recommended that you use it with some formatter. **
 
-You can specify the position that the option should be inserted (By default it would be inserted as the third item of the options).
+If `-t` option is set, typed validation functions are inserted instead of `null`.
 
 ```bash
-$ npx auto-insert-emits generate -p 0 -- ./src/**/*.vue # inserted on the top.
+$ npx auto-insert-emits generate -t -- ./src/**/*.vue
+```
+
+```ts:example
+export default {
+  name: 'UserList',
+  components: {},
++    emits: { input: (payload: string) => payload, click: () => true },
+.
+.
+.
+}
+```
+
+You can also specify the position where `emits` option should be inserted by `-p` option (By default it would be inserted as the third item of the options).
+
+```bash
+$ npx auto-insert-emits generate -p 0 ./src/**/*.vue # inserted on the top.
 ```
 
 ## 📄 License

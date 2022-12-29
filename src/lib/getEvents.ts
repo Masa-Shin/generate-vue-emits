@@ -88,9 +88,7 @@ export const getEvents = (
     const argumentList = current.getArguments();
     const eventName = argumentList[0].getText().slice(1, -1);
     const payload = argumentList[1];
-    const type = file.isTs
-      ? payload?.getType().getText().replace(";", "")
-      : undefined;
+    const type = file.isTs ? payload?.getType().getText() : undefined;
 
     if (!accum[eventName]) {
       accum[eventName] = {

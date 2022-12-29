@@ -4,6 +4,7 @@ import { vueHandler } from "../handler";
 type Options = {
   targetPathPattern: string;
   position: number;
+  isTyped: boolean;
 };
 
 export const command = "generate [targetPathPattern]";
@@ -18,6 +19,14 @@ export const builder = (yargs: Argv<Options>): Argv<Options> => {
         "Path to the target vue files. Can be set with glob pattern. eg: './**/*.vue'",
       default: "./**/*.vue",
     })
+    .option("t", {
+      alias: "isTyped",
+      demandOption: false,
+      default: false,
+      describe:
+        "Whether emit's values are typed function or null. default false.",
+      type: "boolean",
+    })
     .option("p", {
       alias: "position",
       demandOption: false,
@@ -28,11 +37,12 @@ export const builder = (yargs: Argv<Options>): Argv<Options> => {
 };
 
 export const handler = async (argv: Arguments<Options>): Promise<void> => {
-  const { targetPathPattern, position } = argv;
+  const { targetPathPattern, position, isTyped } = argv;
 
   await vueHandler({
     targetPathPattern,
     position,
+    isTyped,
   });
 
   console.log("\nCompleted 🎉");

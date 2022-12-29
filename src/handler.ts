@@ -11,9 +11,11 @@ import { getEvents } from "./lib/getEvents";
 export const vueHandler = async ({
   targetPathPattern,
   position,
+  isTyped,
 }: {
   targetPathPattern: string;
   position: number;
+  isTyped: boolean;
 }): Promise<void> => {
   const filePaths = glob.sync(targetPathPattern, {
     ignore: "./**/node_modules/**/*",
@@ -89,8 +91,11 @@ export const vueHandler = async ({
           : types.length
           ? `payload: ${types.join(" | ")}`
           : "payload";
+        const returnValue = hasPayload ? "payload" : true;
 
-        accum = `${accum} "${name}": (${argument}) => true, `;
+        const value = isTyped ? `(${argument}) => ${returnValue}` : "null";
+
+        accum = `${accum} "${name}": ${value}, `;
         if (i === Object.keys(emitEvents).length - 1) {
           accum = `${accum}}`;
         }
